@@ -4,6 +4,5 @@ public record UpdateUserRequest
     (string UserId,
     string FullName,
     string Email,
-    string Password,
     DateTime BirtDay
     );

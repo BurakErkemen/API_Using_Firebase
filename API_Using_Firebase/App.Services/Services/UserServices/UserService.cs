@@ -27,23 +27,50 @@ namespace App.Services.Services.UserServices
                 HttpStatusCode.Created);
         }
 
-        public Task<ServiceResult> UpdateUserAsync(UpdateUserRequest request)
+        public async Task<ServiceResult> UpdateUserAsync(UpdateUserRequest request)
         {
+            var anyUser = await userRepository.GetByIdAsync(request.UserId);
+
+            if (anyUser is null) return ServiceResult.Fail("User not found!", HttpStatusCode.NotFound);
+
+            anyUser.FullName = request.FullName;
+            anyUser.Email = request.Email;
+            anyUser.BirtDay = request.BirtDay;
+
+            await userRepository.UpdateAsync(anyUser.Id,anyUser);
+
+            return ServiceResult.Success(HttpStatusCode.NoContent);
+
             throw new NotImplementedException();
         }
-        public Task<ServiceResult> DeleteAsync(string userId)
+        public async Task<ServiceResult> DeleteAsync(string userId)
         {
-            throw new NotImplementedException();
+            var anyUser = await userRepository.GetByIdAsync(userId);
+
+            if (anyUser is null) return ServiceResult.Fail("User Not Found!", HttpStatusCode.NotFound);
+
+            await userRepository.DeleteAsync(userId);
+
+            return ServiceResult.Success(HttpStatusCode.NoContent);
         }
 
-        public Task<ServiceResult<List<UserResponse>>> GetAllUsersAsync()
+        public async Task<ServiceResult<List<UserResponse>>> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            var user = await userRepository.GetAllAsync();
+            var userResponse = user.Select(x => new UserResponse(x.Id, x.FullName, x.Email, x.BirtDay)).ToList();
+
+            return ServiceResult<List<UserResponse>>.Success(userResponse, HttpStatusCode.NoContent);
         }
 
-        public Task<ServiceResult<UserResponse>> GetUserByIdAsync(string userId)
+        public async Task<ServiceResult<UserResponse>> GetUserByIdAsync(string userId)
         {
-            throw new NotImplementedException();
+            var anyUser = await userRepository.GetByIdAsync(userId);
+
+            if (anyUser is null) return ServiceResult<UserResponse>.Fail("User Not Found!", HttpStatusCode.NotFound);
+
+            var userResponse = new UserResponse(anyUser.Id, anyUser.FullName, anyUser.Email, anyUser.BirtDay);
+
+            return ServiceResult<UserResponse>.Success(userResponse, HttpStatusCode.NoContent);
         }
 
     }

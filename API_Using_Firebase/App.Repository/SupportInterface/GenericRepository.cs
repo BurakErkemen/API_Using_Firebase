@@ -1,6 +1,4 @@
-﻿
-using Google.Cloud.Firestore;
-using System.Collections;
+﻿using Google.Cloud.Firestore;
 
 namespace App.Repository.SupportInterface
 {
@@ -19,6 +17,19 @@ namespace App.Repository.SupportInterface
         public async Task<string> AddAsync(T entity)
         {
             DocumentReference docRef = await _collectionName.AddAsync(entity);
+
+            // Modelin 'Id' alanına Firestore'un oluşturduğu belge kimliğini ata
+            var entityType = typeof(T);
+            var idProperty = entityType.GetProperty("Id"); // Modelde 'Id' var mı kontrol et
+
+            if (idProperty != null && idProperty.CanWrite)
+            {
+                idProperty.SetValue(entity, docRef.Id); // Firestore'un ID'sini modele ekle
+            }
+
+            // Güncellenmiş modeli tekrar Firestore'a kaydet
+            await docRef.SetAsync(entity);
+
             return docRef.Id;
         }
 

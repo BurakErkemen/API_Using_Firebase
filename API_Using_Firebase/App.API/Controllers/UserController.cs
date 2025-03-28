@@ -17,7 +17,7 @@ namespace App.API.Controllers
             _userService = userService;
         }
 
-        [HttpGet("/getAll")]
+        [HttpGet("getAll")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _userService.GetAllUsersAsync();
@@ -45,7 +45,7 @@ namespace App.API.Controllers
             return CreateActionResult(result);
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{Id}")]
         public async Task<IActionResult> DeleteAsync(string Id)
         {
             var result = await _userService.DeleteAsync(Id);

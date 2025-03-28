@@ -59,10 +59,14 @@ namespace App.Services.Services.UserServices
 
         public async Task<ServiceResult<List<UserResponse>>> GetAllUsersAsync()
         {
-            var user = await userRepository.GetAllAsync();
-            var userResponse = user.Select(x => new UserResponse(x.Id, x.FullName, x.Email, x.BirtDay)).ToList();
+            var users = await userRepository.GetAllAsync();
 
-            return ServiceResult<List<UserResponse>>.Success(userResponse, HttpStatusCode.NoContent);
+            if (users == null || !users.Any())
+                return ServiceResult<List<UserResponse>>.Fail("No users found", HttpStatusCode.NotFound);
+            
+
+            var userResponse = users.Select(x => new UserResponse(x.Id, x.FullName, x.Email, x.BirtDay)).ToList();
+            return ServiceResult<List<UserResponse>>.Success(userResponse, HttpStatusCode.OK);
         }
 
         public async Task<ServiceResult<UserResponse>> GetUserByIdAsync(string userId)
@@ -73,7 +77,7 @@ namespace App.Services.Services.UserServices
 
             var userResponse = new UserResponse(anyUser.Id, anyUser.FullName, anyUser.Email, anyUser.BirtDay);
 
-            return ServiceResult<UserResponse>.Success(userResponse, HttpStatusCode.NoContent);
+            return ServiceResult<UserResponse>.Success(userResponse, HttpStatusCode.OK);
         }
 
     }

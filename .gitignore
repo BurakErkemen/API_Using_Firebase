@@ -404,3 +404,6 @@ FodyWeavers.xsd
 API_Using_Firebase/App.Repository/firebase_credentials.json
 API_Using_Firebase/App.API/appsettings.Development.json
 *.json
+API_Using_Firebase/App.API/appsettings.Development.json
+/API_Using_Firebase/App.API
+*.json

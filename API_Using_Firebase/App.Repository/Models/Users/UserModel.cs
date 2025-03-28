@@ -1,5 +1,4 @@
 ﻿using Google.Cloud.Firestore;
-using System;
 
 namespace App.Repository.Models.Users
 {

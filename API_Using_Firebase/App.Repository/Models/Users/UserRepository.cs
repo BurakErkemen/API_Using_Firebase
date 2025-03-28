@@ -1,6 +1,4 @@
-﻿
-using App.Repository.SupportInterface;
-using Google.Api;
+﻿using App.Repository.SupportInterface;
 
 namespace App.Repository.Models.Users
 {
@@ -9,8 +7,8 @@ namespace App.Repository.Models.Users
         public async Task<UserModel?> GetUserByEmail(string email)
         {
             var querySnapshot = await _collectionName
-     .WhereEqualTo("Email", email)  // "Email" alanı ile sorgulama yapıyoruz
-     .GetSnapshotAsync();
+             .WhereEqualTo("Email", email)  // "Email" alanı ile sorgulama yapıyoruz
+             .GetSnapshotAsync();
 
             // Eğer bir kullanıcı varsa, döndür
             return querySnapshot.Documents

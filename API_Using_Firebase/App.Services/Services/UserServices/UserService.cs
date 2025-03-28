@@ -43,9 +43,8 @@ namespace App.Services.Services.UserServices
             await userRepository.UpdateAsync(anyUser.Id,anyUser);
 
             return ServiceResult.Success(HttpStatusCode.NoContent);
-
-            throw new NotImplementedException();
         }
+        
         public async Task<ServiceResult> DeleteAsync(string userId)
         {
             var anyUser = await userRepository.GetByIdAsync(userId);

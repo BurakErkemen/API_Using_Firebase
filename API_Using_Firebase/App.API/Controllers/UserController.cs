@@ -7,43 +7,49 @@ namespace App.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(IUserService userService) : CustomBaseController
+    public class UserController : CustomBaseController
     {
+        private readonly IUserService _userService;
+
+        // Constructor, IUserService'nin bağımlılığını alır
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
 
         [HttpGet("/getAll")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await userService.GetAllUsersAsync();
+            var result = await _userService.GetAllUsersAsync();
             return CreateActionResult(result);
         }
 
-        [HttpGet]
+        [HttpGet("getbyId/{Id}")]
         public async Task<IActionResult> GetByIdAsync(string Id)
         {
-            var result = await userService.GetUserByIdAsync(Id);
+            var result = await _userService.GetUserByIdAsync(Id);
             return CreateActionResult(result);
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateAsync(CreateUserRequest request)
         {
-            var result = await userService.CreateUserAsync(request);
+            var result = await _userService.CreateUserAsync(request);
             return CreateActionResult(result);
         }
 
-        [HttpPut]
+        [HttpPut("update")]
         public async Task<IActionResult> UpdateAsync(UpdateUserRequest request)
         {
-            var result = await userService.UpdateUserAsync(request);
+            var result = await _userService.UpdateUserAsync(request);
             return CreateActionResult(result);
         }
 
-        [HttpDelete]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteAsync(string Id)
         {
-            var result = await userService.DeleteAsync(Id);
+            var result = await _userService.DeleteAsync(Id);
             return CreateActionResult(result);
         }
-
     }
 }

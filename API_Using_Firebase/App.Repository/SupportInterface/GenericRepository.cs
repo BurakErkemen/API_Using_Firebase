@@ -1,5 +1,6 @@
 ﻿
 using Google.Cloud.Firestore;
+using System.Collections;
 
 namespace App.Repository.SupportInterface
 {
@@ -15,10 +16,10 @@ namespace App.Repository.SupportInterface
         }
 
         // Create
-        public Task AddAsync(T entity)
+        public async Task<string> AddAsync(T entity)
         {
-            var document = _collectionName.Document();
-            return document.SetAsync(entity);
+            DocumentReference docRef = await _collectionName.AddAsync(entity);
+            return docRef.Id;
         }
 
         // Update

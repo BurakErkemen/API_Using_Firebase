@@ -1,4 +1,7 @@
-using App.Repository.Contexts;
+using App.Repository.Extensions;
+using App.Services;
+using App.Services.Extensions;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +12,16 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 
-builder.Services.AddSingleton<FirebaseDbContext>();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<FluentValidationFilter>();
+    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+});
+
+builder.Services.AddRepositories(builder.Configuration).AddServices(builder.Configuration);
 
 
-
+builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
 
 var app = builder.Build();
@@ -20,6 +29,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+
     app.MapOpenApi();
 }
 

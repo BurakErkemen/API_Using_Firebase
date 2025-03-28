@@ -1,6 +1,7 @@
 ﻿using App.Repository.Models.Users;
 using App.Services.Services.UserServices.Create;
 using App.Services.Services.UserServices.Update;
+using Google.Cloud.Firestore;
 using System.Net;
 
 namespace App.Services.Services.UserServices
@@ -18,7 +19,9 @@ namespace App.Services.Services.UserServices
             {
                 FullName = request.FullName,
                 Email = request.Email,
-                Password = request.Password
+                Password = request.Password,
+                BirtDay = Timestamp.FromDateTime(DateTime.UtcNow),  // UTC'yi kullan
+                CreatedAt = Timestamp.FromDateTime(DateTime.UtcNow) // UTC'yi kullan
             };
 
             await userRepository.AddAsync(user);

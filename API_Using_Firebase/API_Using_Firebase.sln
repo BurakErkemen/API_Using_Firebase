@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35913.81 d17.13
+VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.API", "App.API\App.API.csproj", "{A03E9AE1-427F-48BF-8AAC-DDD152BB668C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Repository", "App.Repository\App.Repository.csproj", "{04C6453B-6065-466E-BDB1-04EF31923B1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Services", "App.Services\App.Services.csproj", "{9487B8AF-366F-47AA-BDA2-1E573DCC6F22}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirebaseSetup", "FirebaseSetup\FirebaseSetup.csproj", "{5C81E824-C66F-4CDD-87AB-DA4A93C4B7A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{9487B8AF-366F-47AA-BDA2-1E573DCC6F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9487B8AF-366F-47AA-BDA2-1E573DCC6F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9487B8AF-366F-47AA-BDA2-1E573DCC6F22}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C81E824-C66F-4CDD-87AB-DA4A93C4B7A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C81E824-C66F-4CDD-87AB-DA4A93C4B7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C81E824-C66F-4CDD-87AB-DA4A93C4B7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C81E824-C66F-4CDD-87AB-DA4A93C4B7A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

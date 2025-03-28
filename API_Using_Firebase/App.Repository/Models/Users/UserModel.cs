@@ -20,9 +20,9 @@ namespace App.Repository.Models.Users
 
 
         [FirestoreProperty]
-        public DateTime BirtDay { get; set; }
+        public Timestamp BirtDay { get; set; }
 
         [FirestoreProperty]
-        public DateTime CreatedAt { get; set; }
+        public Timestamp CreatedAt { get; set; }
     }
 }

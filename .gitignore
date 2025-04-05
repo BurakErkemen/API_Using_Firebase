@@ -409,3 +409,4 @@ API_Using_Firebase/App.API/appsettings.Development.json
 *.json
 /API_Using_Firebase
 /API_Using_Firebase/App.API
+API_Using_Firebase/App.API/appsettings.Development.json
